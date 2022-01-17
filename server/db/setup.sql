@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS my_news_test;
+DROP DATABASE IF EXISTS my_news;
+
+CREATE DATABASE my_news_test;
+CREATE DATABASE my_news;
