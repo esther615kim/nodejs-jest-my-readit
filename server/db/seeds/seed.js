@@ -2,7 +2,7 @@ const db = require('../connection');
 const format = require("pg-format");
 const { setTopicInfo,setUserInfo,setArticleInfo,setCommentInfo} = require('./seed-formatting');
 
-const seed = (data) => {
+exports.seed = (data) => {
   const { articleData, commentData, topicData, userData } = data;
   // 1. create tables
 
@@ -75,9 +75,11 @@ const seed = (data) => {
     //     return db.query(sql);
     // })
     .then((result)=>{
-      console.log(console.log(result.rows));
+      console.log("updated!");
+      // console.log(console.log(result.rows));
     })
   }
-module.exports = seed;
+
+// module.exports = seed;
 
 //created_at DATETIME DEFAULT CURRENT_TIMESTAMP,

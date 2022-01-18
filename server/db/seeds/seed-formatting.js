@@ -1,12 +1,14 @@
 // func get data
 const topics =[];
-exports.setTopicInfo = (topicData) => {
+const setTopicInfo = (topicData) => {
+    if(topicData.length === 0) return [];
+     topics.length =0;// any better way to empty the array?
     topicData.forEach(item => topics.push(item.slug));
     return topicData.map((item) => [item.description, item.slug]);
   };
 
 const users =[];
-exports.setUserInfo = (userData) => {
+const setUserInfo = (userData) => {
     userData.forEach(item => users.push(item.username));
     return userData.map((item) => [
         item.username,
@@ -15,7 +17,7 @@ exports.setUserInfo = (userData) => {
     ])
   };
 
-exports.setArticleInfo = (articleData) =>
+const setArticleInfo = (articleData) =>
     articleData.map((item)=>{ 
         if(topics.includes(item.topic) && users.includes(item.author)){
             return [
@@ -42,3 +44,5 @@ exports.setArticleInfo = (articleData) =>
 //         item.body
 //     ])
 // }
+
+module.exports = {topics,users,setTopicInfo,setUserInfo}
