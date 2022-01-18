@@ -1,6 +1,6 @@
 const db = require('../connection');
 const format = require("pg-format");
-const { setTopicInfo,setUserInfo,setArticleInfo,setCommentInfo} = require('./seed-formatting');
+const { setTopicInfo,setUserInfo,setArticleInfo,setCommentInfo,articleRef } = require('./seed-formatting');
 
 exports.seed = (data) => {
   const { articleData, commentData, topicData, userData } = data;
@@ -67,16 +67,19 @@ exports.seed = (data) => {
         )
         return db.query(sql);
     })
-    // .then(()=>{
-    //   const sql = format(`INSERT INTO comments
-    //   (author,article_id,votes,created_at,body)
-    //   VALUES %L RETURNING *;`, setCommentInfo(commentData)
-    //     )
-    //     return db.query(sql);
-    // })
+    .then((result)=>{
+      const articleIds = articleRef(result.rows);
+
+      const sql = format(`INSERT INTO comments
+      (author,article_id,votes,created_at,body)
+      VALUES %L RETURNING *;`, setCommentInfo(commentData, articleIds)
+        )
+        return db.query(sql);
+      
+    })
     .then((result)=>{
       console.log("updated!");
-      // console.log(console.log(result.rows));
+      console.log(result.rows);
     })
   }
 

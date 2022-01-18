@@ -3,12 +3,13 @@ const testData = require('../db/data/test-data/index.js');
 const { setTopicInfo,topics } = require('../db/seeds/seed-formatting.js');
 const { seed } = require('../db/seeds/seed.js');
 
+afterAll(() => db.end());
 
 describe('seed-formatting functions', () => {
 
-    beforeEach(() => {
-        seed(testData);
-    });
+    // beforeEach(() => {
+    //     seed(testData);
+    // });
 
     test('should return an empty obj when an empty array is passed ', () => {
         const emptyArray = [];
@@ -64,7 +65,6 @@ describe('seed-formatting functions', () => {
     });
 })
 
-// afterAll(() => db.end());
 
 
 // const db = require('../db/connection.js');
