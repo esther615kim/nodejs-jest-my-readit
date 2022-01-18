@@ -6,7 +6,8 @@
   "scripts": {
     "dbs": "psql -f ./db/setup.sql",
     "seed": "nodemon ./db/seeds/run-seed.js",
-    "test": "jest"
+    "test": "jest --watch",
+    "dev": "nodemon ./app.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,6 @@
   },
   "homepage": "https://github.com/northcoders/be-nc-news#readme",
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^14.1.0",
     "express": "^4.17.2",
     "jest": "^27.4.7",
@@ -28,5 +28,8 @@
     "pg": "^8.7.1",
     "pg-format": "^1.0.4",
     "supertest": "^6.2.1"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5"
   }
 }

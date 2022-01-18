@@ -41,16 +41,16 @@ const articleRef = (articleInfo) => {
 
 const setCommentInfo = (commentData, articleIds) => {
 
-   return commentData.map((item)=>{
-       if(articleIds.includes(item.article_id)&& users.includes(item.author)){
-        return [
-            item.author, //REFERENCES users(username)
-            item.article_id, // REFERENCES article(article_id)
-            item.votes,
-            item.created_at,
-            item.body
-        ]
-       }
+    return commentData.map((item) => {
+        if (articleIds.includes(item.article_id) && users.includes(item.author)) {
+            return [
+                item.author, //REFERENCES users(username)
+                item.article_id, // REFERENCES article(article_id)
+                item.votes,
+                item.created_at,
+                item.body
+            ]
+        }
     })
 }
 

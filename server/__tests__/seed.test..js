@@ -7,9 +7,9 @@ afterAll(() => db.end());
 
 describe('seed-formatting functions', () => {
 
-    // beforeEach(() => {
-    //     seed(testData);
-    // });
+    beforeEach(() => {
+        return seed(testData);
+    });
 
     test('should return an empty obj when an empty array is passed ', () => {
         const emptyArray = [];
