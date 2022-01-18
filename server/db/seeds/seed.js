@@ -1,6 +1,6 @@
 const db = require('../connection');
 const format = require("pg-format");
-const { seedTopicInfo,seedUserInfo,seedArticleInfo,seedCommentInfo} = require('./seed-formatting');
+const { setTopicInfo,setUserInfo,setArticleInfo,setCommentInfo} = require('./seed-formatting');
 
 const seed = (data) => {
   const { articleData, commentData, topicData, userData } = data;
@@ -49,41 +49,35 @@ const seed = (data) => {
     .then(() => {
       const sql = format(`INSERT INTO topics
       (description,slug)
-      VALUES %L RETURNING *;`,seedTopicInfo(topicData)
+      VALUES %L RETURNING *;`,setTopicInfo(topicData)
         )
         return db.query(sql);
     })
     .then(() => {
       const sql = format(`INSERT INTO users
       ( username,avatar_url,name)
-      VALUES %L RETURNING *;`, seedUserInfo(userData)
+      VALUES %L RETURNING *;`, setUserInfo(userData)
         )
         return db.query(sql);
     })
     .then(() => {
       const sql = format(`INSERT INTO articles
-      (title,body,votes,created_at)
-      VALUES %L RETURNING *;`, seedArticleInfo(articleData)
+      (title,body,votes,topic,created_at,author)
+      VALUES %L RETURNING *;`, setArticleInfo(articleData)
         )
         return db.query(sql);
     })
-    .then(()=>{
-      console.log("all updated2");
+    // .then(()=>{
+    //   const sql = format(`INSERT INTO comments
+    //   (author,article_id,votes,created_at,body)
+    //   VALUES %L RETURNING *;`, setCommentInfo(commentData)
+    //     )
+    //     return db.query(sql);
+    // })
+    .then((result)=>{
+      console.log(console.log(result.rows));
     })
-    .then(()=>{
-      // add slugs
-      return db.query(`
-      INSERT INTO articles
-      (topic,author)
-      SELECT slug
-      FROM topics
-      VALUES
-      ();`
-      )
-    })
-    
   }
 module.exports = seed;
 
 //created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-// 

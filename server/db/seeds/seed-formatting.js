@@ -1,9 +1,13 @@
 // func get data
-exports.seedTopicInfo = (topicData) => {
+const topics =[];
+exports.setTopicInfo = (topicData) => {
+    topicData.forEach(item => topics.push(item.slug));
     return topicData.map((item) => [item.description, item.slug]);
   };
 
-  exports.seedUserInfo = (userData) => {
+const users =[];
+exports.setUserInfo = (userData) => {
+    userData.forEach(item => users.push(item.username));
     return userData.map((item) => [
         item.username,
         item.avatar_url,
@@ -11,23 +15,30 @@ exports.seedTopicInfo = (topicData) => {
     ])
   };
 
-exports.seedArticleInfo = (articleData) =>{
-    return articleData.map((item)=>[
-        item.title,
-        item.body,
-        item.votes,
-        // item.topic, // REFERENCES topics(slug)
-        item.created_at
-        // item.author // REFERENCES users(username)
-    ])
-}
+exports.setArticleInfo = (articleData) =>
+    articleData.map((item)=>{ 
+        if(topics.includes(item.topic) && users.includes(item.author)){
+            return [
+                item.title,
+                item.body,
+                item.votes,
+                item.topic, // REFERENCES topic(slug)
+                item.created_at,
+                item.author // REFERENCES users(username)
+            ]
+        } 
+    }
+)
 
-exports.seedCommentInfo = (commentData) =>{
-    return commentData.map((item)=>[
-        // item.author,// REFERENCES users(username)
-        // item.article_id, // REFERENCES article(article_id)
-        item.votes,
-        item.created_at,
-        item.body
-    ])
-}
+// exports.setCommentInfo = (commentData) =>{
+    
+//     return commentData.map((item)=>[
+//         item.author,
+//         item.article_id,
+//         // item.author,// REFERENCES users(username)
+//         // item.article_id, // REFERENCES article(article_id)
+//         item.votes,
+//         item.created_at,
+//         item.body
+//     ])
+// }

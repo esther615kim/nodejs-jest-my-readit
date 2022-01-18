@@ -64,7 +64,7 @@ Each comment should have:
 - `created_at` defaults to the current timestamp
 - `body`
 
-### Seeding
+### ✅ Seeding
 
 You need to complete the provided seed function to insert the appropriate data into your database.
 
