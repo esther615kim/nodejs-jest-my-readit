@@ -2,14 +2,16 @@ const { fetchArticles, fetchArticleById,addArticle } = require('../models/articl
 
 exports.getArticles = (req,res,next) =>{
 
-    fetchArticles()
+    const {sort_by} = req.query;
+    fetchArticles(sort_by)
     .then((articles)=>{
         res.status(200).send({articles}); 
     })
-    .catch((err)=>{
-        res.status(500).send({msg:"Internal server error"})
-        // next(err);
-    })
+    .catch(next);
+    // .catch((err)=>{
+    //    res.status(500).send({msg:"Internal server error"})
+    //     next(err);
+    // })
 }
 
 exports.getArticleById =(req,res,next)=>{
@@ -21,8 +23,8 @@ exports.getArticleById =(req,res,next)=>{
         res.status(200).send({article}); 
     })
     .catch((err)=>{
-        res.status(500).send({msg:"Internal server error"})
-        // next(err);
+        // res.status(500).send({msg:"Internal server error"})
+        next(err);
     })
 }
 

@@ -6,7 +6,7 @@
   "scripts": {
     "dbs": "psql -f ./db/setup.sql",
     "seed": "nodemon ./db/seeds/run-seed.js",
-    "test": "jest --watch",
+    "test": "jest",
     "dev": "nodemon ./app.js"
   },
   "repository": {
@@ -27,9 +27,13 @@
     "nodemon": "^2.0.15",
     "pg": "^8.7.1",
     "pg-format": "^1.0.4",
-    "supertest": "^6.2.1"
+    "supertest": "^6.2.2"
   },
   "devDependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "jest-sorted": "^1.0.14"
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["jest-sorted"]
   }
 }

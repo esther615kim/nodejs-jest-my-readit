@@ -12,34 +12,34 @@ exports.seed = (data) => {
       return db.query(`
     CREATE TABLE topics (
       slug VARCHAR(45) PRIMARY KEY,
-      description VARCHAR(255) NOT NULL
+      description VARCHAR(254) NOT NULL
     );`);
     })
     .then(() => {
       return db.query(`
     CREATE TABLE users (
-      username VARCHAR(255) PRIMARY KEY,
-      avatar_url VARCHAR(255) NOT NULL,
-      name VARCHAR(255) NOT NULL
+      username VARCHAR(254) PRIMARY KEY,
+      avatar_url VARCHAR(254) NOT NULL,
+      name VARCHAR(254) NOT NULL
     );`);
     })
     .then(() => {
       return db.query(`
     CREATE TABLE articles (
       article_id SERIAL PRIMARY KEY NOT NULL,
-      title VARCHAR(255),
+      title VARCHAR(254),
       body TEXT NOT NULL,
       votes SMALLINT DEFAULT 0,
-      topic VARCHAR(255) REFERENCES topics(slug),
+      topic VARCHAR(254) REFERENCES topics(slug),
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      author VARCHAR(255) REFERENCES users(username)
+      author VARCHAR(254) REFERENCES users(username)
     );`);
     })
     .then(() => {
       return db.query(`
       CREATE TABLE comments (
         comment_id SERIAL PRIMARY KEY,
-        author VARCHAR(255) REFERENCES users(username),
+        author VARCHAR(254) REFERENCES users(username),
         article_id SERIAL REFERENCES articles(article_id),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         votes SMALLINT DEFAULT 0,
@@ -79,7 +79,7 @@ exports.seed = (data) => {
     })
     .then((result)=>{
       console.log("updated!");
-      console.log(result.rows);
+      // console.log(result.rows);
     })
   }
 

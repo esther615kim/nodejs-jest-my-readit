@@ -83,29 +83,25 @@ Work through building endpoints in the following order:
 
 _This is a summary of all the endpoints. More detail about each endpoint is further down this document._
 
-**Essential endpoints**
+**Essential endpoints & test codes**
 
 ```http
 ✅ GET /api/topics
 ✅ GET /api/articles/:article_id
-PATCH /api/articles/:article_id
 ✅ GET /api/articles
-GET /api/articles/:article_id/comments
+✅ GET /api/articles/:article_id/comments
+✅ GET /api/users
+✅ GET /api/users/:username
+
+error-handling codes & test codes for GET methods
+
+PATCH /api/articles/:article_id
+PATCH /api/comments/:comment_id
+
 POST /api/articles/:article_id/comments
 DELETE /api/comments/:comment_id
 ```
 
-> Hosting and README time!
-
-**Next endpoints to work through**
-
-```http
-✅ GET /api/users
-✅ GET /api/users/:username
-PATCH /api/comments/:comment_id
-```
-
----
 
 All of your endpoints should send the responses specified below in an **object**, with a **key name** of what it is that being sent. E.g.
 
