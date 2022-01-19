@@ -11,9 +11,9 @@ const commentsRouter = require("./routes/commentsRouter");
 
 app.use(express.json());
 
-app.use("/api/articles", articlesRouter);
-app.use("/api/users", usersRouter);
-app.use("/api/articles/:id/comments", commentsRouter);
+app.use("/articles", articlesRouter);
+app.use("/users", usersRouter);
+app.use("/", commentsRouter);
 // app.use('/votes', votesRouter);
 
 // anything else incl 404s

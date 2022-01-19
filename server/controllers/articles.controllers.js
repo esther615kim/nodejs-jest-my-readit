@@ -1,4 +1,4 @@
-const { fetchArticles, fetchArticleById,addArticle } = require('../models/articles.models');
+const { fetchArticles, fetchArticleById, updateArticleById } = require('../models/articles.models');
 
 exports.getArticles = (req,res,next) =>{
 
@@ -7,11 +7,9 @@ exports.getArticles = (req,res,next) =>{
     .then((articles)=>{
         res.status(200).send({articles}); 
     })
-    .catch(next);
-    // .catch((err)=>{
-    //    res.status(500).send({msg:"Internal server error"})
-    //     next(err);
-    // })
+    .catch((err)=>{
+        next(err);
+    })
 }
 
 exports.getArticleById =(req,res,next)=>{
@@ -23,12 +21,15 @@ exports.getArticleById =(req,res,next)=>{
         res.status(200).send({article}); 
     })
     .catch((err)=>{
-        // res.status(500).send({msg:"Internal server error"})
         next(err);
     })
 }
 
-exports.postArticle =(req,res)=>{
-    const article= req.body;
-    addArticle(article);
-}
+exports.patchArticleById = (req, res, next) => {
+    const { article_id } = req.params;
+    updateArticleById(article_id, req.body)
+      .then((articles) => {
+        res.status(200).send({ articles });
+      })
+      .catch(next);
+  };

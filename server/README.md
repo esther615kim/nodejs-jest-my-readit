@@ -93,13 +93,15 @@ _This is a summary of all the endpoints. More detail about each endpoint is furt
 ✅ GET /api/users
 ✅ GET /api/users/:username
 
-error-handling codes & test codes for GET methods
+✅ error-handling codes & test codes for GET methods
+✅ fixed test setting 
+
+✅ DELETE /api/comments/:comment_id
+👩‍🏫 POST /api/articles/:article_id/comments
 
 PATCH /api/articles/:article_id
 PATCH /api/comments/:comment_id
 
-POST /api/articles/:article_id/comments
-DELETE /api/comments/:comment_id
 ```
 
 
@@ -151,7 +153,7 @@ Responds with:
   - `topic`
   - `created_at`
   - `votes`
-  - `comment_count` which is the total count of all the comments with this article_id - you should make use of queries to the database in order to achieve this
+  - `comment_count` which is the total count of all the comments with this article_id - you should make use of queries to the database in order to achieve this 🥦
 
 ---
 
@@ -159,7 +161,7 @@ Responds with:
 
 Request body accepts:
 
-- an object in the form `{ inc_votes: newVote }`
+- an object in the form `{ inc_votes: newVote }` 🥦
 
   - `newVote` will indicate how much the `votes` property in the database should be updated by
 
@@ -186,13 +188,13 @@ Responds with:
   - `topic`
   - `created_at`
   - `votes`
-  - `comment_count` which is the total count of all the comments with this article_id - you should make use of queries to the database in order to achieve this
+  - `comment_count` which is the total count of all the comments with this article_id - you should make use of queries to the database in order to achieve this 🥦
 
 Should accept queries:
 
 - `sort_by`, which sorts the articles by any valid column (defaults to date)
 - `order`, which can be set to `asc` or `desc` for ascending or descending (defaults to descending)
-- `topic`, which filters the articles by the topic value specified in the query
+- `topic`, which filters the articles by the topic value specified in the query 🥦
 
 ---
 

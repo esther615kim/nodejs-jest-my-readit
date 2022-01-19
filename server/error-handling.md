@@ -13,7 +13,7 @@ Bear in mind, handling bad inputs from clients doesn't necessarily have to lead 
 
 - 200 OK
 - 201 Created
-- 204 No Content
+- 204 No Content (delete)
 - 400 Bad Request
 - 404 Not Found
 - 405 Method Not Allowed
