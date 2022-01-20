@@ -62,40 +62,31 @@ describe('articleRouter', () => {
                 .get('/articles/3')
                 .expect(200)
                 .then((res) => {
-                    console.log(res)
-                    // expect(res.body.articles).toHaveLength(1); // should fail?
+                    console.log(res.body)
+                    expect(res.body.article.article_id).toBe(3);
+                    expect(res.body.article).toBeInstanceOf(Object);
                 })
         })
     })
 
-    describe("PATCH", () => {
-        describe("/api/articles/:article_id", () => {
+    describe("PATCH/articles/:id", () => {
 
-          test("200: should respond with the updated article ", () => {
-            const article_Id = 3;
-            // const articleUpdate = { inc_votes: 2 };
-            return request(app)
-              .patch(`/api/articles/${article_Id}`)
-              .send(articleUpdate)
-              .expect(200)
-              .then(({ body }) => {
-                expect(body.articles).toEqual({
-                  article_id: 3,
-                  title: "Eight pug gifs that remind me of mitch",
-                  topic: "mitch",
-                  author: "icellusedkars",
-                  body: "some gifs",
-                  created_at: "2020-11-03T09:12:00.000Z",
-                  votes: 2,
-                });
-              });
+          test.only("200: should respond with the updated article ", () => {
+
+            // return request(app)
+            //   .patch('articles/2')
+            // //   .send({votes:2})
+            //   .expect(200)
+            //   .then((res) => {
+            //       console.log(res.body);
+            //   });
           });
 
           test ("400:should respond with an error message", () => {
             const article_Id = 3;
             const articleUpdate = { inc_votes: 2 };
             return request(app)
-              .patch(`/api/articles/${article_Id}`)
+              .patch(`/articles/${article_Id}`)
               .expect(400)
               .then(({ body }) => {
                 expect(body.msg).toBe(`Invalid input`);
@@ -104,7 +95,6 @@ describe('articleRouter', () => {
         });
       });
 
-});
 
 
 // test('should' ,()=>{})

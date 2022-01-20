@@ -10,9 +10,7 @@ exports.fetchArticles = (sort_by = "created_at") => {
 
   return db
     .query(`SELECT * FROM articles ORDER BY ${sort_by} ASC;`)
-    .then((result) => {
-      return result.rows;
-    })
+    .then((result) => result.rows)
     .catch(
       (err) => {
         console.log(err)
@@ -22,18 +20,14 @@ exports.fetchArticles = (sort_by = "created_at") => {
 exports.fetchArticleById = (id) => {
   return db
     .query("SELECT * FROM articles WHERE article_id=$1;", [id])
-    .catch((err) => {
-      console.log(err)
-    });
+    .then((result) => {
+      return result.rows[0]
+    })
 };
 
-exports.updateArticleById = (article_id, articleUpdate) => {
-  const { inc_votes: newVote } = articleUpdate;
+exports.updateArticle = (id, update) => {
+  console.log("article:",id,"votes:",update);
   return db
-    .query(
-      `UPDATE articles SET votes = ${newVote} WHERE article_id = ${article_id} RETURNING *;`
-    )
-    .then(({ rows }) => {
-      return rows[0];
-    });
+    .query("UPDATE articles SET votes=$1 WHERE article_id=$2 RETURNING *;",[update,id])
+    .then((result) => result.rows);
 };

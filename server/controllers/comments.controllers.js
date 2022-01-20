@@ -3,13 +3,14 @@ const { fetchComments,removeComment} = require('../models/comments.models');
 exports.getComments = (req,res,next) =>{
     const article_id = req.params.id;
     console.log("article_id for comments",article_id)
+    
     fetchComments(article_id)
     .then((comments)=>{
         res.status(200).send({comments}); 
     })
     .catch((err)=>{
-        res.status(500).send({msg:"Internal server error"})
-        // next(err);
+        // res.status(500).send({msg:"Internal server error"})
+        next(err);
     })
 }
 
