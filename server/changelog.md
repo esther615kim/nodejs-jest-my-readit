@@ -15,17 +15,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 [to-dos]
-GET /api/articles 🥦 add `comment_count`
-GET /api/articles 🥦 add queries: `order`,`topic`
-POST /api/articles/:article_id/comments 
+✅ GET /api/articles 🥦 add `comment_count`
+    GET /api/articles 🥦 add queries: `order`,`topic`
+✅ POST /api/articles/:article_id/comments 
   - `username`
   - `body`
-POST /api/articles 
+    POST /api/articles 
   - `author` which is the `username` from the users table
   - `title`
   - `body`
   - `topic`
-POST /api/topics
+    POST /api/topics
   - `slug`
   - `description`
 
@@ -43,8 +43,8 @@ POST /api/topics
 ✅ DELETE /api/comments/:comment_id (204)
 ✅ PATCH /api/comments/:comment_id
 
-   DELETE /api/articles/:article_id (204)
-   PATCH /api/articles/:article_id
+✅ DELETE /api/articles/:article_id (204)
+✅ PATCH /api/articles/:article_id
 
 - changelog.md to keep track of changes in my-reddit project
 ### Changed

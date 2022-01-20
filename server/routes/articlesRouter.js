@@ -12,5 +12,4 @@ router.delete('/:id', deleteArticle)
 
 // router.post('/', postArticle);
 
-
 module.exports = router;

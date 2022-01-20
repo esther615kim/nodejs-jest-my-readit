@@ -20,7 +20,7 @@ app.use("/", commentsRouter);
 app.all("*", (req, res) => {
   console.log("handle 404s");
   res.status(404).send({ msg: "Invalid URL" });
-}); // comes last
+});
 
 // general error handlng
 app.use((err, req, res, next) => {

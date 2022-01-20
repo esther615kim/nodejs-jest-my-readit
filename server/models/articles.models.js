@@ -17,6 +17,7 @@ exports.fetchArticles = (sort_by = "created_at") => {
       });
 };
 
+
 exports.fetchArticleById = (id) => {
   return db
     .query(`SELECT articles.*, COUNT(comments.article_id) 

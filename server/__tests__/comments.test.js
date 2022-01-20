@@ -41,7 +41,7 @@ describe("commentsRouter", () => {
         .delete("/comments/9999")
         .expect(404)
         .then((res) => {
-         console.log(res.body); // {}
+          expect(res.body.msg).toBe("Not found");
         });
     });
 
@@ -52,4 +52,30 @@ describe("commentsRouter", () => {
         .then((res) => console.log(res.body));
     });
   });
-});
+
+  describe("POST",()=>{
+    test("201: should return the newly updated data",()=>{
+      return request(app)
+      .post('/articles/3/comments')
+      .send({"username":"lurker","body":"hello!"})
+      .expect(201)
+      .then((res) => {
+          expect(res.body.comment).toBeInstanceOf(Object);
+          expect(res.body.comment.author).toBe("lurker");
+      })
+    });
+
+    test("404: username not found",()=>{
+      return request(app)
+      .post('/articles/5/comments')
+      .send({"username":"Esther","body":"I'm not a user!"})
+      .expect(404)
+      .then((res)=>{
+        expect(res.body.msg).toBe("Invalid user");
+    })
+      })
+    });
+
+
+}); // end
+
