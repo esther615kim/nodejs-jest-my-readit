@@ -91,8 +91,8 @@ describe('articleRouter', () => {
                 expect(res.body.article.votes).toBe(12);
             })
           });
-          // 🙈 thrown: "Exceeded timeout of 5000 ms for a test.
-          test.skip("422: unprocessable Entity",()=>{
+
+          test("422: unprocessable Entity",()=>{
             return request(app)
             .patch('/articles/6')
             .send({"votes":"cake", "message":"I'm hungry"})
