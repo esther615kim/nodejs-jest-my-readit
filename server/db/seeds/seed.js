@@ -78,7 +78,7 @@ exports.seed = (data) => {
       
     })
     .then((result)=>{
-      console.log("updated!");
+      console.log("tables all refreshed!");
       // console.log(result.rows);
     })
   }

@@ -29,5 +29,12 @@ exports.updateArticle = (id, update) => {
   console.log("article:",id,"votes:",update);
   return db
     .query("UPDATE articles SET votes=$1 WHERE article_id=$2 RETURNING *;",[update,id])
-    .then((result) => result.rows);
+    .then((result) => {
+      return result.rows[0];
+    })
+};
+
+exports.removeArticle = (id) => {
+  console.log("article to delete:",id)
+  return db.query("DELETE FROM articles where article_id=$1;",[id]);
 };

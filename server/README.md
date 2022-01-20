@@ -97,11 +97,12 @@ _This is a summary of all the endpoints. More detail about each endpoint is furt
 ✅ fixed test setting 
 
 ✅ DELETE /api/comments/:comment_id
+✅ DELETE /api/articles/:article_id
+
+✅ PATCH /api/comments/:comment_id
+👩‍🏫 PATCH /api/articles/:article_id
+
 👩‍🏫 POST /api/articles/:article_id/comments
-
-PATCH /api/articles/:article_id
-PATCH /api/comments/:comment_id
-
 ```
 
 

@@ -35,7 +35,7 @@ describe("commentsRouter", () => {
     });
   });
 
-  describe("DELETE/articles/:id/comments", () => {
+  describe("DELETE/comments/:id/", () => {
     test("404:NOT found", () => {
       return request(app)
         .delete("/comments/9999")
