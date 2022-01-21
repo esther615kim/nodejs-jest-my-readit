@@ -16,14 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 [to-dos]
-    POST /api/articles 
-  - `author` which is the `username` from the users table
-  - `title`
-  - `body`
-  - `topic`
-    GET /api/articles 🥦 add queries: `order`,`topic`
-  
-  - hosting with heroku
+  - GET /api/articles (add queries: `order`,`topic`)
+  - POST /api/articles (comments_count)
+## [0.0.4] -2022-01-21
+
+✅ hosting with heroku
+### Installed
+- Heroku
 
 ## [0.0.3] -2022-01-20
 ### Added
@@ -38,15 +37,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ✅ POST /api/topics
   - `slug`
   - `description`
-
-### Installed
-- Heroku 
-
+✅ POST /api/articles 
+  - `author` which is the `username` from the users table
+  - `title`
+  - `body`
+  - `topic`
+### Changed
+- articles.test.js and comments.test.js to add test codes
 ### Fixed
-- Promise.reject codes in controllers to fix jest exceeded timeout error.
-
+- Promise.reject codes in controllers to fix jest exceeded timeout error
 ### Issue
-- is HTTP code 422 Unprocessable Entity okay to reject posting an existing topic slug?
+- [HTTP code] is HTTP code 422 Unprocessable Entity okay to reject posting an existing topic slug?
+- [HTTP code] When to use 418 
+- [JS] input validation to check more than one key in object (sorted)
 
 ## [0.0.2] -2022-01-19
 ### Added

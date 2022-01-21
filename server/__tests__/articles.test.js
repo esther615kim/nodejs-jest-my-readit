@@ -11,8 +11,7 @@ describe('articleRouter', () => {
     beforeEach(() => {
         return seed(testData);
     });
-
-// 404: invalid URL 
+ 
     describe("404: /invalid_url",()=>{
         test("404: Invalid URL",()=>{
             return request(app)
@@ -24,7 +23,6 @@ describe('articleRouter', () => {
         })
     })
 
-// articles
     describe('GET/articles', () => {
 
         test('200: should respond with an array of articles', () => {
@@ -53,7 +51,7 @@ describe('articleRouter', () => {
         })
 
 
-    }) // describe GET/articles
+    })
 
     describe('GET/articles/:id', () => {
         test('200: should return an article object',()=>{
@@ -123,6 +121,40 @@ describe('articleRouter', () => {
             });
           });
 
+          describe.only("POST",()=>{
+
+            test("201: should return the newly updated data",()=>{
+              return request(app)
+              .post('/articles')
+              .send({"author":"lurker","title":"Morning","body":"everyone!","topic":"cats"})
+              .expect(201)
+              .then((res) => {
+                  expect(res.body.article).toBeInstanceOf(Object);
+                  expect(res.body.article.topic).toBe("cats");
+                  expect(res.body.article.title).toBe("Morning");
+              })
+            });
+
+            test("422: Invalid input",()=>{
+                return request(app)
+                .post('/articles')
+                .send({"author":"lurker","title":"Morning","body":"everyone!","topic":"dogs"})
+                .expect(422)
+                .then((res) => {
+                    expect(res.body.msg).toBe("Invalid input");
+                })
+              });
+        
+            test("418: I'm a teapot",()=>{
+              return request(app)
+              .post('/articles')
+              .send({"author":"lurker","title":"Morning"})
+              .expect(418)
+              .then((res)=>{
+                expect(res.body.msg).toBe("I'm a teapot");
+            })
+              })
+            });
 
         }); // end
         

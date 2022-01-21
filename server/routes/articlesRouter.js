@@ -1,15 +1,21 @@
 const router = require("express").Router();
 
-const { getArticles, getArticleById,patchArticle,deleteArticle} = require('../controllers/articles.controllers');
+const {
+  getArticles,
+  getArticleById,
+  patchArticle,
+  deleteArticle,
+  postArticle,
+} = require("../controllers/articles.controllers");
 
-router.get('/', getArticles);
+router.get("/", getArticles);
 
-router.get('/:id', getArticleById);
+router.get("/:id", getArticleById);
 
-router.patch('/:id', patchArticle);
+router.patch("/:id", patchArticle);
 
-router.delete('/:id', deleteArticle)
+router.delete("/:id", deleteArticle);
 
-// router.post('/', postArticle);
+router.post("/", postArticle);
 
 module.exports = router;
