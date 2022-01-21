@@ -5,9 +5,9 @@ exports.fetchTopics = () => {
     .then((result) => result.rows);
 };
 
-exports.removeTopic = (id) => {
-  console.log("Topic to delete:", id);
-  return db.query("DELETE FROM topics where topic_id=$1;", [id]);
+exports.removeTopic = (slug) => {
+  console.log("Topic to delete:", slug);
+  return db.query("DELETE FROM topics where slug=$1;", [slug]);
 };
 
 exports.addTopic = (topic) => {

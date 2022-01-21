@@ -12,12 +12,11 @@ exports.getTopics = (req,res,next) =>{
     })
 }
 
-// needs fixing
 exports.deleteTopic = (req,res,next)=>{
 
-    const topic_id = req.params.id;
+    const slug = req.params.id;
 
-    removeTopic(topic_id)
+    removeTopic(slug)
     .then(({rowCount})=>{
         if(rowCount){
             res.status(204).send({msg:"deleted successfully"}).end();

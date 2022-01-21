@@ -19,8 +19,4 @@ const config =
       }
     : {};
 
-module.exports = new Pool();
-
-// NODE_ENV=production DATABASE_URL= npm start
-
-// postgres://cfzrqjbdlpzvbn:2efb6afbbb70422a968b02d3d65202ccae297e941bc5ed2c7f2b47348be88c97@ec2-54-83-152-251.compute-1.amazonaws.com:5432/d4n8lqsem0rf16
+module.exports = new Pool(config);
