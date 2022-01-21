@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 
 require("dotenv").config();
-// const PORT = process.env.PORT
-const PORT = 9090;
+const {PORT} = process.env;
+const port = 9090;
 
 const topicsRouter = require("./routes/topicsRouter");
 const articlesRouter = require("./routes/articlesRouter");
@@ -40,8 +40,9 @@ app.use((err, req, res, next) => {
   res.status(500).send({ msg: "Internal server error" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+app.listen(PORT||port, (err) => {
+  if(err) throw err;
+  console.log("Server is listening on port...");
 });
 
 module.exports = app;
