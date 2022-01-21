@@ -1,11 +1,10 @@
-const { fetchTopics,removeTopic} = require('../models/topics.models');
+const { fetchTopics,removeTopic, addTopic} = require('../models/topics.models');
 
 
 exports.getTopics = (req,res,next) =>{
 
     fetchTopics()
     .then((topics)=>{
-        console.log("all topics",topics);
         res.status(200).send({topics}); 
     })
     .catch((err)=>{
@@ -17,6 +16,7 @@ exports.getTopics = (req,res,next) =>{
 exports.deleteTopic = (req,res,next)=>{
 
     const topic_id = req.params.id;
+
     removeTopic(topic_id)
     .then(({rowCount})=>{
         if(rowCount){
@@ -25,6 +25,22 @@ exports.deleteTopic = (req,res,next)=>{
             return Promise.reject({status:404, msg:"Not found"});
         }
     }).catch((err)=>{
+        next(err);
+    })
+}
+
+exports.postTopics =(req,res,next)=>{
+
+    const newTopic = req.body;
+
+    addTopic(newTopic)
+    .then((topic) =>{
+        topic ? 
+        res.status(201).send({topic}) 
+        : res.status(422).send({msg:"Resource already exists" });
+    }
+    )
+    .catch((err)=>{
         next(err);
     })
 }

@@ -11,27 +11,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Installed` for newly installed libraries or etc
 - `Removed` for now removed features
 - `Fixed` for any bug fixes
+- `Issue` for any issues/errors
 
 ## [Unreleased]
 
 [to-dos]
-✅ GET /api/articles 🥦 add `comment_count`
-    GET /api/articles 🥦 add queries: `order`,`topic`
-✅ POST /api/articles/:article_id/comments 
-  - `username`
-  - `body`
     POST /api/articles 
   - `author` which is the `username` from the users table
   - `title`
   - `body`
   - `topic`
-    POST /api/topics
+    GET /api/articles 🥦 add queries: `order`,`topic`
+  
+  - hosting with heroku
+
+## [0.0.3] -2022-01-20
+### Added
+- endpoints and test codes 
+
+✅ DELETE /api/articles/:article_id (204)
+✅ PATCH /api/articles/:article_id
+✅ GET /api/articles (add `comment_count`)
+✅ POST /api/articles/:article_id/comments 
+  - `username` (condition to check)
+  - `body`
+✅ POST /api/topics
   - `slug`
   - `description`
 
+### Installed
+- Heroku 
+
+### Fixed
+- Promise.reject codes in controllers to fix jest exceeded timeout error.
+
+### Issue
+- is HTTP code 422 Unprocessable Entity okay to reject posting an existing topic slug?
+
 ## [0.0.2] -2022-01-19
 ### Added
-- essential endpoints and test codes
+- endpoints and test codes
 
 ✅ GET /api/topics
 ✅ GET /api/articles/:article_id
@@ -42,9 +61,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ✅ PATCH /api/comments/:comment_id
 ✅ DELETE /api/comments/:comment_id (204)
 ✅ PATCH /api/comments/:comment_id
-
-✅ DELETE /api/articles/:article_id (204)
-✅ PATCH /api/articles/:article_id
 
 - changelog.md to keep track of changes in my-reddit project
 ### Changed

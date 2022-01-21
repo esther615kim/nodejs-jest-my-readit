@@ -5,6 +5,7 @@ require("dotenv").config();
 // const PORT = process.env.PORT
 const PORT = 9090;
 
+const topicsRouter = require("./routes/topicsRouter");
 const articlesRouter = require("./routes/articlesRouter");
 const usersRouter = require("./routes/usersRouter");
 const commentsRouter = require("./routes/commentsRouter");
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/articles", articlesRouter);
 app.use("/users", usersRouter);
 app.use("/", commentsRouter);
+app.use("/topics", topicsRouter);
 // app.use('/votes', votesRouter);
 
 // anything else incl 404s

@@ -18,7 +18,7 @@ Bear in mind, handling bad inputs from clients doesn't necessarily have to lead 
 - 404 Not Found ✅
 - 405 Method Not Allowed 
 - 418 I'm a teapot ?
-- 422 Unprocessable Entity ✅
+- 422 Unprocessable Entity ✅ (okay for already existing topic?)
 - 500 Internal Server Error ✅
 
 ---
