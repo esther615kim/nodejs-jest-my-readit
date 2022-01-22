@@ -27,7 +27,7 @@ describe('articleRouter', () => {
 
         test('200: should respond with an array of articles', () => {
             return request(app)
-                .get('/articles')
+                .get('/api/articles')
                 .expect(200)
                 .then((res) => {
                     expect(res.body.articles).toBeInstanceOf(Array);
@@ -37,26 +37,28 @@ describe('articleRouter', () => {
 
         test('200: should be sorted by date by default', () => {
             return request(app)
-                .get('/articles')
+                .get('/api/articles')
                 .expect(200)
                 .then((res) => {
                     expect(res.body.articles).toBeSortedBy('created_at');
                 })
         })
 
-        test('400: invalid sort_by column', () => {
+        test.only('400: invalid input in sort_by query', () => {
             return request(app)
-            .get('/articles/5')
-            .expect(200)
+            .get('/api/articles?sort_by=cats')
+            .expect(400)
+            .then((res) => {
+                expect(res.body.msg).toBe("Bad Request");
+            })
         })
-
 
     })
 
     describe('GET/articles/:id', () => {
         test('200: should return an article object',()=>{
             return request(app)
-                .get('/articles/3')
+                .get('/api/articles/3')
                 .expect(200)
                 .then((res) => {
                     console.log(res.body)
@@ -70,7 +72,7 @@ describe('articleRouter', () => {
 
           test("200: should return the updated article ", () => {
             return request(app)
-            .patch('/articles/3')
+            .patch('/api/articles/3')
             .send({"votes":3})
             .expect(200)
             .then((res) => {
@@ -81,7 +83,7 @@ describe('articleRouter', () => {
 
           test("200: only update 'votes' and ignore other inputs", () => {
             return request(app)
-            .patch('/articles/6')
+            .patch('/api/articles/6')
             .send({"votes":12, "message":"I'm hungry"})
             .expect(200)
             .then((res) => {
@@ -92,7 +94,7 @@ describe('articleRouter', () => {
 
           test("422: unprocessable Entity",()=>{
             return request(app)
-            .patch('/articles/6')
+            .patch('/api/articles/6')
             .send({"votes":"cake", "message":"I'm hungry"})
             .expect(422)
             .then((res) => {
@@ -106,7 +108,7 @@ describe('articleRouter', () => {
             
             test("404: Not found", () => {
               return request(app)
-                .delete("/articles/9999")
+                .delete("/api/articles/9999")
                 .expect(404)
                 .then((res)=>{
                     expect(res.body.msg).toBe("Not found");
@@ -115,17 +117,17 @@ describe('articleRouter', () => {
         
             test("204: article deleted successfully ", () => {
               return request(app)
-                .delete("/articles/7")
+                .delete("/api/articles/7")
                 .expect(204)
                 .then((res) => console.log(res.body));
             });
           });
 
-          describe.only("POST",()=>{
+          describe("POST",()=>{
 
             test("201: should return the newly updated data",()=>{
               return request(app)
-              .post('/articles')
+              .post('/api/articles')
               .send({"author":"lurker","title":"Morning","body":"everyone!","topic":"cats"})
               .expect(201)
               .then((res) => {
@@ -137,7 +139,7 @@ describe('articleRouter', () => {
 
             test("422: Invalid input",()=>{
                 return request(app)
-                .post('/articles')
+                .post('/api/articles')
                 .send({"author":"lurker","title":"Morning","body":"everyone!","topic":"dogs"})
                 .expect(422)
                 .then((res) => {
@@ -147,7 +149,7 @@ describe('articleRouter', () => {
         
             test("418: I'm a teapot",()=>{
               return request(app)
-              .post('/articles')
+              .post('/api/articles')
               .send({"author":"lurker","title":"Morning"})
               .expect(418)
               .then((res)=>{
@@ -156,9 +158,4 @@ describe('articleRouter', () => {
               })
             });
 
-        }); // end
-        
-
-
-
-// test('should' ,()=>{})
+        });

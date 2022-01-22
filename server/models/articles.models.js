@@ -1,19 +1,17 @@
 const db = require("../db/connection");
 
-exports.fetchArticles = (sort_by = "created_at") => {
-  const sortBys = ["author", "created_at"]; // 'topic' => filtering
+exports.fetchArticles = ({ sort_by = "created_at", order="desc", topic}) => {
 
-  // error handling:400
-  if (!sortBys.includes(sort_by)) {
-    return res.status(400).send({ msg: "Bad request" });
-  }
-
-  return db
-    .query(`SELECT * FROM articles ORDER BY ${sort_by} ASC;`)
+  // need refactoring idea here (DRY)
+  if(topic){
+    return db
+    .query(`SELECT * FROM articles WHERE topic in ($1) ORDER BY $2 ${order.toUpperCase()};`,[topic,sort_by])
     .then((result) => result.rows)
-    .catch((err) => {
-      console.log(err);
-    });
+  }else{
+    return db
+    .query(`SELECT * FROM articles ORDER BY $1 ${order.toUpperCase()};`,[sort_by])
+    .then((result) => result.rows)
+  } 
 };
 
 exports.fetchArticleById = (id) => {
@@ -49,7 +47,7 @@ exports.removeArticle = (id) => {
 
 exports.addArticle = (article) => {
 
-  const { author, title, body, topic } = article; //users(username), topics(slug)
+  const { author, title, body, topic } = article;
 
   // check 1 valid user
   return db
@@ -84,3 +82,4 @@ exports.addArticle = (article) => {
     });
 
 };
+

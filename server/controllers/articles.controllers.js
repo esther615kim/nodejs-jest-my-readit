@@ -7,18 +7,33 @@ const {
 } = require("../models/articles.models");
 
 exports.getArticles = (req, res, next) => {
-  const { sort_by } = req.query;
+  const {sort_by}= req.query;
+  const {order} = req.query;
+  const query = req.query;
 
-  fetchArticles(sort_by)
+  const sortBys = ["created_at","author","title","article_id","topic","votes"];
+  const orders =["asc","desc"]
+
+  // input check1 
+  if (sort_by && !sortBys.includes(sort_by)||(order && !orders.includes(order))) {
+
+    return res.status(400).send({ msg: "Bad bad request" });
+
+  }else{
+
+    fetchArticles(query)
     .then((articles) => {
-      res.status(200).send({ articles });
+      articles.length? res.status(200).send({ articles }) 
+      : res.status(404).send({ msg: "Nothing found" });
     })
     .catch((err) => {
       next(err);
     });
+  }
 };
 
 exports.getArticleById = (req, res, next) => {
+
   const article_id = req.params.id;
 
   fetchArticleById(article_id)
@@ -32,7 +47,7 @@ exports.getArticleById = (req, res, next) => {
 
 exports.patchArticle = (req, res, next) => {
   const article_id = req.params.id;
-  const update = req.body.votes; //
+  const update = req.body.votes; 
 
   const numberChecker = /^(\s|\d)+$/;
 
