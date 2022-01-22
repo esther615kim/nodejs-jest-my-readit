@@ -93,6 +93,9 @@ exports.postArticle = (req, res, next) => {
     return res.status(418).send({ msg: "I'm a teapot" });
   }
     addArticle(newArticle)
+    .then((result)=>{
+      updateArticle(result[0].article_id); // 체크필요함!
+    })
     .then((article) => {
       article
         ? res.status(201).send({ article })

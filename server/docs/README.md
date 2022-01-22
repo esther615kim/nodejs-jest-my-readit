@@ -58,45 +58,32 @@ Each comment has
 
 - `seed.js` and `seed-formatting.js` in seed folder
 
----
-
 ## **3 Endpoints**
 
-- different environments set for test and development
+### different environments set for test and development
 
----
+-✅GET /api/topics
+-✅GET /api/articles/:article_id
+-✅PATCH /api/articles/:article_id (inc_votes)
+-✅GET /api/articles (queries:sort_by,order,topic)
+-✅GET /api/articles/:article_id/comments
+-✅POST /api/articles/:article_id/comments
+-✅DELETE /api/comments/:comment_id
+-✅GET /api
+-✅Hosting with Heroku
 
-**Endpoints created in the project**
+Next endpoints 
 
-`GET /topics`
+-✅GET /api/users
+-✅GET /api/users/:username
+-✅PATCH /api/comments/:comment_id
 
-`DELETE /topics`
-
-`POST /topics`
-
-`GET /articles ☂`
-
-`GET /articles/:article_id`
-
-`PATCH /articles/:article_id`
-
-`DELETE /articles/:article_id`
-
-`POST /articles/:article_id`
-
-`GET /comments`
-
-`GET/articles/:article_id/comments`
-
-`POST /articles/:article_id/comments`
-
-`DELETE /comments/:comment_id`
-
-`PATCH /comments/:comment_id`
-
-`GET /users
-GET /users/:username`
-`GET /api☂`
+Extra endpoints
+-✅POST /api/articles (comment_count)
+-✅GET /api/comments
+-✅POST /api/topics
+-📚 DELETE /api/articles/:id (on delete cascade)
+-📚 DELETE /api/articles/:id 
 
 ---
 

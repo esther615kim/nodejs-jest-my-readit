@@ -4,7 +4,7 @@ Essential endpoints
 
 ✅GET /api/topics
 ✅GET /api/articles/:article_id
-✅PATCH /api/articles/:article_id
+✅PATCH /api/articles/:article_id (inc_votes)
 ✅GET /api/articles (queries:sort_by,order,topic)
 ✅GET /api/articles/:article_id/comments
 ✅POST /api/articles/:article_id/comments
@@ -16,7 +16,7 @@ Next endpoints
 
 ✅GET /api/users
 ✅GET /api/users/:username
-✅PATCH /api/comments/:comment_id (inc_votes)
+✅PATCH /api/comments/:comment_id
 
 Extra endpoints
 ✅POST /api/articles (comment_count)
