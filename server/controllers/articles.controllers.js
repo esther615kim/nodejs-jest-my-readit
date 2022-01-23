@@ -68,7 +68,7 @@ exports.deleteArticle = (req, res, next) => {
   const article_id = req.params.id;
 
   removeArticle(article_id)
-    .then(({ rowCount }) => {
+    .then(({rowCount}) => {
       if (rowCount) {
         return res.status(204).send({ msg: "deleted" }).end();
       } else {
@@ -94,7 +94,7 @@ exports.postArticle = (req, res, next) => {
   }
     addArticle(newArticle)
     .then((result)=>{
-      updateArticle(result[0].article_id); // 체크필요함!
+      updateArticle(result[0].article_id); // 체크필요!
     })
     .then((article) => {
       article

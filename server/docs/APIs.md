@@ -75,9 +75,7 @@ votes
 comment_count which is the total count of all the comments with this article_id - you should make use of queries to the database in order to achieve this
 Should accept queries:
 
-sort_by, which sorts the articles by any valid column (defaults to date)
-order, which can be set to asc or desc for ascending or descending (defaults to descending)
-topic, which filters the articles by the topic value specified in the query
+
 GET /api/articles/:article_id/comments
 Responds with:
 

@@ -40,9 +40,19 @@ exports.updateArticle = (id, update) => {
     });
 };
 
+// working but why?
 exports.removeArticle = (id) => {
   console.log("article to delete:", id);
-  return db.query("DELETE FROM articles where article_id=$1;", [id]);
+
+  // return db.query("ALTER TABLE comments DROP CONSTRAINT comments_author_fkey;")
+  return db.query("select * from information_schema.table_constraints where table_name = 'comments';")
+  // .then(()=>{
+  //   "ALTER TABLE comments ADD CONSTRAINT comments_author_fkey FOREIGN KEY(article_id) REFERENCES articles(article_id) ON DELETE CASCADE;" 
+  // })
+  .then(()=>{
+    return db.query("DELETE FROM articles where article_id=$1;", [id])
+  })
+  .then((result)=> (result));
 };
 
 exports.addArticle = (article) => {
