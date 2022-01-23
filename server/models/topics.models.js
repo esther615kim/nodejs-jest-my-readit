@@ -1,13 +1,16 @@
 const db = require("../db/connection");
 
-exports.fetchTopics = () => {
-    return db.query("SELECT * FROM topics;")
-    .then((result) => result.rows);
+exports.fetchTopics = async() => {
+    const res = await db.query("SELECT * FROM topics;");
+    
+    return res.rows;
 };
 
-exports.removeTopic = (slug) => {
+exports.removeTopic = async(slug) => {
   console.log("Topic to delete:", slug);
-  return db.query("DELETE FROM topics where slug=$1;", [slug]);
+  const res = await db.query("DELETE FROM topics where slug=$1;", [slug]);
+
+  return res;
 };
 
 exports.addTopic = (topic) => {

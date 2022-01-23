@@ -14,14 +14,13 @@ exports.getUsers = (req,res,next) =>{
 
 exports.getUsersByUsername=(req,res,next)=>{
     const username = req.params.id;
-    console.log(username)
+    console.log(username);
 
     fetchUserByUsername(username)
     .then((user)=>{
         res.status(200).send({user}); 
     })
     .catch((err)=>{
-        res.status(500).send({msg:"Internal server error"})
-        // next(err);
+        next(err);
     })
 }

@@ -14,30 +14,31 @@ exports.fetchArticles = ({ sort_by = "created_at", order="desc", topic}) => {
   } 
 };
 
-exports.fetchArticleById = (id) => {
-  return db
+exports.fetchArticleById = async (id) => {
+
+  const response = await db
     .query(
       `SELECT articles.*, COUNT(comments.article_id) 
     AS comment_count FROM articles 
     LEFT JOIN comments ON articles.article_id = comments.article_id
    WHERE articles.article_id = $1 GROUP BY articles.article_id`,
       [id]
-    )
-    .then(({ rows }) => {
-      return rows[0];
-    });
+    );
+
+    return response.rows[0];
 };
 
-exports.updateArticle = (id, update) => {
+exports.updateArticle = async(id, update) => {
+  
   console.log("article:", id, "votes:", update);
-  return db
+
+   const response = await db
     .query("UPDATE articles SET votes=$1 WHERE article_id=$2 RETURNING *;", [
       update,
       id,
-    ])
-    .then((result) => {
-      return result.rows[0];
-    });
+    ]);
+
+    return response.rows[0];
 };
 
 // working but why?
@@ -52,7 +53,7 @@ exports.removeArticle = (id) => {
   .then(()=>{
     return db.query("DELETE FROM articles where article_id=$1;", [id])
   })
-  .then((result)=> (result));
+  .then(({rowCount})=> ({rowCount}));
 };
 
 exports.addArticle = (article) => {

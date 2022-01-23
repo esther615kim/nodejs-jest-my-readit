@@ -5,6 +5,5 @@ const { getUsers, getUsersByUsername} = require('../controllers/users.controller
 router.get('/',getUsers);
 
 router.get('/:id', getUsersByUsername);
-// router.post('/create',createArticle);
 
 module.exports = router;

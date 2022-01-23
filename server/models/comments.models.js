@@ -1,19 +1,29 @@
 const db = require("../db/connection");
 
-exports.fetchComments = (id) => {
-  return db
-    .query("SELECT * FROM comments where article_id=$1;", [id])
-    .then((result) => result.rows);
+exports.fetchComments = async(id) => {
+  const res = await db
+    .query("SELECT * FROM comments where article_id=$1;", [id]);
+
+    return res.rows;
 };
 
-exports.fetchAllComments = () => {
-  return db.query("SELECT * FROM comments;").then((result) => result.rows);
+exports.fetchComments = async(id) => {
+  const res = await db
+    .query("SELECT * FROM comments where article_id=$1;", [id]);
+    
+    return res.rows[0];
+};
+
+exports.fetchAllComments = async() => {
+   const res = await db.query("SELECT * FROM comments;");
+   
+   return res.rows; 
 };
 
 
-exports.removeComment = (id) => {
+exports.removeComment = async(id) => {
   console.log("comment to delete:", id);
-  return db.query("DELETE FROM comments where comment_id=$1;", [id]);
+  const res = await db.query("DELETE FROM comments where comment_id=$1;", [id]);
 };
 
 

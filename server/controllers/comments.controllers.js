@@ -3,7 +3,7 @@ const { fetchComments,removeComment,addComment, fetchAllComments} = require('../
 exports.getComments = (req,res,next) =>{
 
     const article_id = req.params.id;
-
+    console.log(article_id);
     fetchComments(article_id)
     .then((comments)=>{
         res.status(200).send({comments}); 
@@ -14,7 +14,6 @@ exports.getComments = (req,res,next) =>{
 }
 
 exports.getAllComments  = (req,res,next) =>{
-
 
     fetchAllComments()
     .then((comments)=>{
