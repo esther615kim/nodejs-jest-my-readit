@@ -40,7 +40,7 @@ exports.seed = (data) => {
       CREATE TABLE comments (
         comment_id SERIAL PRIMARY KEY,
         author VARCHAR(254) REFERENCES users(username),
-        article_id SERIAL REFERENCES articles(article_id),
+        article_id SERIAL REFERENCES articles(article_id) ON DELETE CASCADE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         votes SMALLINT DEFAULT 0,
         body TEXT

@@ -21,9 +21,16 @@ exports.fetchAllComments = async() => {
 };
 
 
-exports.removeComment = async(id) => {
+exports.removeComment = (id) => {
   console.log("comment to delete:", id);
-  const res = await db.query("DELETE FROM comments where comment_id=$1;", [id]);
+  // to add: check if it exists
+  return db
+    .query(
+      "select EXISTS (select * from comments where comment_id=$1 limit 1) as success;",
+      [id]
+    )
+    .then((result) => { console.log(result)})
+   
 };
 
 

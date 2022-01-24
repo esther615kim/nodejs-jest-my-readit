@@ -8,7 +8,9 @@ const PORT = process.env.PORT || 9090;
 const routes = require('./routes');
 
 app.use(express.json());
-app.use('/api',routes);
+app.use('/api',()=>{
+  console.log("browser")
+});
 
 
 app.all("*", (req, res) => {
