@@ -71,7 +71,7 @@ describe("commentsRouter", () => {
       .send({"username":"Esther","body":"I'm not a user!"})
       .expect(404)
       .then((res)=>{
-        expect(res.body.msg).toBe("Invalid user");
+        expect(res.body.msg).toBe("Invalid URL");
     })
       })
     });

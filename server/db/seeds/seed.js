@@ -27,23 +27,23 @@ exports.seed = (data) => {
       return db.query(`
     CREATE TABLE articles (
       article_id SERIAL PRIMARY KEY NOT NULL,
-      title VARCHAR(254),
+      title VARCHAR(254) NOT NULL,
       body TEXT NOT NULL,
-      votes SMALLINT DEFAULT 0,
-      topic VARCHAR(254) REFERENCES topics(slug),
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      author VARCHAR(254) REFERENCES users(username)
+      votes SMALLINT DEFAULT 0 NOT NULL,
+      topic VARCHAR(254) REFERENCES topics(slug) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+      author VARCHAR(254) REFERENCES users(username)NOT NULL
     );`);
     })
     .then(() => {
       return db.query(`
       CREATE TABLE comments (
-        comment_id SERIAL PRIMARY KEY,
-        author VARCHAR(254) REFERENCES users(username),
-        article_id SERIAL REFERENCES articles(article_id) ON DELETE CASCADE,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        votes SMALLINT DEFAULT 0,
-        body TEXT
+        comment_id SERIAL PRIMARY KEY NOT NULL,
+        author VARCHAR(254) REFERENCES users(username) NOT NULL,
+        article_id SERIAL REFERENCES articles(article_id) ON DELETE CASCADE NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+        votes SMALLINT DEFAULT 0 NOT NULL,
+        body TEXT NOT NULL
       );`);
     })
     .then(() => {
