@@ -40,30 +40,52 @@ describe('articleRouter', () => {
                 .get('/api/articles')
                 .expect(200)
                 .then((res) => {
-                    expect(res.body.articles).toBeSortedBy('created_at');
+                    expect(res.body.articles).toBeSorted({ descending: true });
+                    // .toBeSortedBy('created_at',{ descending: true});
                 })
         })
 
-        test.only('400: invalid input in sort_by query', () => {
+
+        test('400: invalid input in sort_by query', () => {
             return request(app)
             .get('/api/articles?sort_by=cats')
             .expect(400)
             .then((res) => {
-                expect(res.body.msg).toBe("Bad Request");
+                expect(res.body.msg).toBe("Bad bad request");
             })
         })
 
     })
 
     describe('GET/articles/:id', () => {
+
         test('200: should return an article object',()=>{
             return request(app)
                 .get('/api/articles/3')
                 .expect(200)
                 .then((res) => {
-                    console.log(res.body)
                     expect(res.body.article.article_id).toBe(3);
                     expect(res.body.article).toBeInstanceOf(Object);
+                })
+        }),
+
+        test('400: Invalid ID',()=>{
+            return request(app)
+                .get('/api/articles/cake')
+                .expect(400)
+                .then((res) => {
+                    console.log(res.body)
+                    expect(res.body.msg).toBe("Invalid input");
+                })
+        }),
+
+        test('404: non existent ID',()=>{
+            return request(app)
+                .get('/api/articles/9999')
+                .expect(404)
+                .then((res) => {
+                    console.log(res.body)
+                    expect(res.body.msg).toBe("non existent ID");;
                 })
         })
     })

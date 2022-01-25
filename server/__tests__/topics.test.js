@@ -12,6 +12,19 @@ describe('topicRouter', () => {
         return seed(testData);
     });
 
+    describe('GET/articles', () => {
+
+      test.only('200: should respond with an array of object', () => {
+          return request(app)
+              .get('/api/topics')
+              .expect(200)
+              .then((res) => {
+                  expect(res.body.articles).toBeInstanceOf(Array);
+                  expect(res.body.articles).toHaveLength(3);
+              })
+      })
+    })
+
     describe("POST",()=>{
 
         test("201: should return the newly updated data",()=>{

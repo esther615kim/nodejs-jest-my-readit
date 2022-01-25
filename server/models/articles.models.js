@@ -16,7 +16,14 @@ exports.fetchArticles = ({ sort_by = "created_at", order="desc", topic}) => {
 
 exports.fetchArticleById = async (id) => {
 
-  const response = await db
+  const res = await db
+  .query(
+    "select EXISTS (select * from articles where article_id=$1 limit 1) as success;",
+    [id]
+  );
+
+  if(res.rows[0].success){
+    const nextRes = await db
     .query(
       `SELECT articles.*, COUNT(comments.article_id) 
     AS comment_count FROM articles 
@@ -24,9 +31,21 @@ exports.fetchArticleById = async (id) => {
    WHERE articles.article_id = $1 GROUP BY articles.article_id`,
       [id]
     );
-
-    return response.rows[0];
+    console.log(nextRes.rows[0])
+    return nextRes.rows[0];
+  }
+  console.log("article_id not valid")
 };
+
+
+
+
+
+
+
+
+
+
 
 exports.updateArticle = async(id, update) => {
   
@@ -38,6 +57,7 @@ exports.updateArticle = async(id, update) => {
       id,
     ]);
 
+    console.log("votes added",response.rows[0])
     return response.rows[0];
 };
 
@@ -58,50 +78,62 @@ exports.removeArticle = async(id) => {
 };
 
 
-exports.addArticle = async(article) => {
+exports.addArticle = async(newArticle) => {
 
-  const { author, title, body, topic } = article;
+//   const { author, title, body, topic } = newArticle;
+//   console.log(author,title,body,topic);
 
-  // check 1 valid user
-  // const res = await db
-  // .query(
-  //   "select EXISTS (select * from users where username=$1 limit 1) as success;",
-  //   [author]
-  // );
+//   const res = await db
+//   .query(
+//     "select EXISTS (select * from users where username=$1 limit 1) as success;",
+//     [author]
+//   );
 
-  // const restNext = await (res.rows[0].success) && db.query(
-  //   "select EXISTS (select * from topics where slug=$1 limit 1) as success;",
-  //   [topic]
-  // );
+//   if(res.rows){
+//     const nextRes = await db
+//   db.query(
+//             "INSERT INTO articles (author, title, body, topic ) VALUES ($1,$2,$3,$4) RETURNING *;",
+//             [author, title, body, topic]
+//           );
 
-  // const 
-  
-  //   // .then((result) => {
-  //   //   if (!result.rows[0].success) {
-  //   //     return;
-  //   //   } else {
-  //   //     // check 2 existing topic
-  //   //     return 
-  //   //   }
-  //   // })
+//      return console.log("nextRes", nextRes);
+//       // return nextRes.rows;
+//   };
+// };
 
+  const { author, title, body, topic } = newArticle;
 
-  //   .then((result) => {
-  //     if (!result.rows[0].success) {
-  //       return;
-  //     } else {
-  //       // to add- comment_count
-  //       return db.query(
-  //         "INSERT INTO articles (author, title, body, topic ) VALUES ($1,$2,$3,$4) RETURNING *;",
-  //         [author, title, body, topic]
-  //       );
-  //     }
-  //   })
+  return db
+    .query(
+      "select EXISTS (select * from users where username=$1 limit 1) as success;",
+      [author]
+    )
+    .then((result) => {
+      if (!result.rows[0].success) {
+        return;
+      } else {
+        // check 2 existing topic
+        return db.query(
+          "select EXISTS (select * from topics where slug=$1 limit 1) as success;",
+          [topic]
+        );
+      }
+    })
+    .then((result) => {
+      if (!result.rows[0].success) {
+        return;
+      } else {
+        // to add- comment_count
+        return db.query(
+          "INSERT INTO articles (author, title, body, topic ) VALUES ($1,$2,$3,$4) RETURNING *;",
+          [author, title, body, topic]
+        );
+      }
+    })
+    .then((result) => {
+      // console.log(result.rows[0]);
+      return result && result.rows[0];
+    });
+  }
 
-
-  //   .then((result) => {
-  //     return result && result.rows[0];
-  //   });
-
-};
 
