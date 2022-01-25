@@ -62,28 +62,25 @@ Each comment has
 
 ### different environments set for test and development
 
--✅GET /api/topics
--✅GET /api/articles/:article_id
--✅PATCH /api/articles/:article_id (inc_votes)
--✅GET /api/articles (queries:sort_by,order,topic)
--✅GET /api/articles/:article_id/comments
--✅POST /api/articles/:article_id/comments
--✅DELETE /api/comments/:comment_id
--✅GET /api
--✅Hosting with Heroku
-
-Next endpoints 
-
--✅GET /api/users
--✅GET /api/users/:username
--✅PATCH /api/comments/:comment_id
+- ✅GET /api/topics
+- ✅GET /api/articles/:article_id
+- ✅PATCH /api/articles/:article_id (inc_votes)
+- ✅GET /api/articles (queries:sort_by,order,topic)
+- ✅GET /api/articles/:article_id/comments
+- ✅POST /api/articles/:article_id/comments
+- ✅DELETE /api/comments/:comment_id
+- ✅GET /api
+- ✅Hosting with Heroku
+- ✅GET /api/users
+- ✅GET /api/users/:username
+- ✅PATCH /api/comments/:comment_id
 
 Extra endpoints
--✅POST /api/articles (comment_count)
--✅GET /api/comments
--✅POST /api/topics
--📚 DELETE /api/articles/:id (on delete cascade)
--📚 DELETE /api/articles/:id 
+- ✅POST /api/articles (comment_count)
+- ✅GET /api/comments
+- ✅POST /api/topics
+- 📚 DELETE /api/articles/:id (on delete cascade)
+- 📚 DELETE /api/articles/:id 
 
 ---
 
