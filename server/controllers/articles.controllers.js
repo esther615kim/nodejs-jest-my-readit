@@ -51,18 +51,18 @@ exports.getArticleById = (req, res, next) => {
   }
 
   // case: not a number
-if(!isNumber(parseInt(article_id))) {
-  return res.status(400).send({ msg: "Invalid input" });
-}
+// if(!isNumber(parseInt(article_id))) {
+//   return res.status(400).send({ msg: "Invalid input" });
+// }
  
   fetchArticleById(article_id)
-    .then((article) => {
-      article && res.status(200).send({ article });
-      // res.status(404).send({ msg: "non existent ID" });
-    }) //here!
-    .catch((err) => {
-      next(err);
-    });
+  //   .then((article) => {
+  //     article && res.status(200).send({ article });
+  //     res.status(404).send({ msg: "non existent ID" });
+  //   }) //here!
+  //   .catch((err) => {
+  //     next(err);
+  //   });
 };
 
 exports.patchArticle = (req, res, next) => {

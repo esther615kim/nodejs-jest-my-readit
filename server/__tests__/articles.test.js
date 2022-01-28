@@ -3,6 +3,7 @@ const { seed } = require('../db/seeds/seed.js');
 const request = require('supertest');
 const testData = require('../db/data/test-data/index.js');
 const app = require('../app');
+const { keys } = require('../db/data/test-data/articles.js');
 
 afterAll(() => db.end());
 
@@ -79,7 +80,9 @@ describe('articleRouter', () => {
                 })
         }),
 
-        test('404: non existent ID',()=>{
+        // fix this one⚽
+
+        test.only('404: non existent ID',()=>{
             return request(app)
                 .get('/api/articles/9999')
                 .expect(404)
@@ -87,6 +90,13 @@ describe('articleRouter', () => {
                     console.log(res.body)
                     expect(res.body.msg).toBe("non existent ID");;
                 })
+        })
+
+        test('400: invalid inc_votes type',()=>{
+
+        })
+        test('200: missing inc_votes keys',()=>{
+
         })
     })
 
