@@ -19,7 +19,7 @@
 
 - Finally, run `npm run test` to see the tests or `npm run dev` to run the server.
 
-- minimum versions of `Node.js` and `Postgres` needed to run the project: 
+- minimum versions of `Node.js` and `Postgres` needed to run the project: Node.js `v17.3.0` Postgres `12.9`
 
   
 ## List of APIs 
