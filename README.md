@@ -62,5 +62,5 @@
 
 ## Special Thanks
 
-to Duncan-NC and Hamas
+to Duncan-NC and [@CrypticSignal](https://github.com/CrypticSignal)
 
