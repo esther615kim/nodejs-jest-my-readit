@@ -11,7 +11,7 @@
 
 
 ##  How to Run
-
+<p align="left">
 - Click [here](https://ek-reddit.herokuapp.com/articles) to view the deployed server to Heroku
 
 - To run the app, clone the repo and run it with `npm install`. Create `.env` files and run the followings: `npm run dbs`. then, `npm run seed`.
@@ -19,7 +19,7 @@
 - Finally, run `npm run test` to see the tests or `npm run dev` to run the server.
 
 - minimum versions of `Node.js` and `Postgres` needed to run the project: 
-
+  </p>
 ## List of APIs 
 | Status Method | ✅| Queries | 
 | :--: | :-----------------: | :------------: |
