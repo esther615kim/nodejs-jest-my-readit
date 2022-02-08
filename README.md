@@ -11,7 +11,7 @@
 
 
 ##  How to Run
-<p align="left">
+<div align="left">
 - Click [here](https://ek-reddit.herokuapp.com/articles) to view the deployed server to Heroku
 
 - To run the app, clone the repo and run it with `npm install`. Create `.env` files and run the followings: `npm run dbs`. then, `npm run seed`.
@@ -19,8 +19,9 @@
 - Finally, run `npm run test` to see the tests or `npm run dev` to run the server.
 
 - minimum versions of `Node.js` and `Postgres` needed to run the project: 
-  </p>
+  </div>
 ## List of APIs 
+  <div align="left">
 | Status Method | ✅| Queries | 
 | :--: | :-----------------: | :------------: |
 | GET /api/topics |✅||  
@@ -38,9 +39,10 @@
 |POST /api/topics|✅|| 
 |DELETE /api/articles/:id (on delete cascade)|✅|| 
 |GET /api|✏|| 
+     </div>
 
 ## Lessons  Learned
-
+ <div align="left">
 - How to design `SQL databases` and referencing tables
 
 - How to maintain the `MVC` design pattern 
@@ -48,13 +50,13 @@
 - How to write test code using various `jest matchers` and `supertest`
 
 - How to use the docs or open-sourced materials to learn anything new 
-
+</div>
 
 ## Ideas for Improvement
-
+ <div align="left">
 - [ ]  Add more test cases for 400s code
 - [ ]  Pagination  middleware
-
+ </div>
 
 ## Special Thanks
 to Duncan-NC and Hamas
