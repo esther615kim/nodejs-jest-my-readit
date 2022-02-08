@@ -1,3 +1,4 @@
+
 <h1 align="center"> MyReadit</h1><p align="center">
 <div align="center">
 <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript"/> <img src="https://img.shields.io/badge/Express.js-0F9A41?style=for-the-badge&logo=express" alt="Express" /> <img src="https://img.shields.io/badge/Postgres-32668E?style=for-the-badge&logo=postgresql&logoColor=FFF" alt="Postgres" /> <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest" alt="Jest" /> 
@@ -11,6 +12,7 @@
 
 
 ##  How to Run
+  
 <div align="left">
 - Click [here](https://ek-reddit.herokuapp.com/articles) to view the deployed server to Heroku
 
@@ -20,8 +22,9 @@
 
 - minimum versions of `Node.js` and `Postgres` needed to run the project: 
   </div>
+  
 ## List of APIs 
-  <div align="left">
+
 | Status Method | ✅| Queries | 
 | :--: | :-----------------: | :------------: |
 | GET /api/topics |✅||  
@@ -39,9 +42,10 @@
 |POST /api/topics|✅|| 
 |DELETE /api/articles/:id (on delete cascade)|✅|| 
 |GET /api|✏|| 
-     </div>
+
 
 ## Lessons  Learned
+  
  <div align="left">
 - How to design `SQL databases` and referencing tables
 
@@ -52,11 +56,16 @@
 - How to use the docs or open-sourced materials to learn anything new 
 </div>
 
+  
 ## Ideas for Improvement
+  
  <div align="left">
 - [ ]  Add more test cases for 400s code
 - [ ]  Pagination  middleware
  </div>
 
 ## Special Thanks
+  
+  <div align="left">
 to Duncan-NC and Hamas
+ </div>
