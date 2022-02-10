@@ -11,8 +11,7 @@ router.use("/articles", articlesRouter);
 router.use("/users", usersRouter);
 router.use("/", commentsRouter);
 
-router.use("/",(err,req,res)=>{ // not working
-  if(err) throw err;
+router.get("/",(req,res,next)=>{ // not working
   console.log('browser');
   res.status(200).send(apis);
 });
