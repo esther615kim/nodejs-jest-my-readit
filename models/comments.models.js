@@ -56,3 +56,17 @@ exports.addComment = (comment) => {
       return result && result.rows[0];
     });
 };
+
+exports.updateComment = async(id, update) => {
+  
+  console.log("comment:", id, "votes:", update);
+
+   const response = await db
+    .query("UPDATE comments SET votes=$1 WHERE article_id=$2 RETURNING *;", [
+      update,
+      id,
+    ]);
+
+    console.log("votes added",response.rows[0])
+    return response.rows[0];
+};

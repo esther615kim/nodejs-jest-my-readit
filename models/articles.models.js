@@ -40,13 +40,6 @@ exports.fetchArticleById = async (id) => {
 
 
 
-
-
-
-
-
-
-
 exports.updateArticle = async(id, update) => {
   
   console.log("article:", id, "votes:", update);

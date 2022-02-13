@@ -1,12 +1,14 @@
 const router = require("express").Router();
 
-const { getComments,deleteComment,postComment,getAllComments } = require('../controllers/comments.controllers');
+const { getComments,deleteComment,postComment,getAllComments,patchComment } = require('../controllers/comments.controllers');
 
 router.get('/articles/:id/comments', getComments);
 
 router.get('/comments',getAllComments);
 
 router.delete('/comments/:id', deleteComment);
+
+router.patch("/:id", patchComment);
 
 router.post('/articles/:id/comments', postComment);
 
