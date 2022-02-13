@@ -64,7 +64,6 @@ if(!isNumber(parseInt(article_id))) {
   //   .catch((err) => {
   //     next(err);
   //   });
-  fetchArticleById(article_id)
   .then((article) => {
     res.status(200).send({ article });
   })

@@ -1,4 +1,4 @@
-const { fetchComments,removeComment,addComment, updateComment,fetchAllComments} = require('../models/comments.models');
+const { fetchComments,removeComment,addComment,fetchCommentById, updateComment,fetchAllComments} = require('../models/comments.models');
 
 exports.getComments = (req,res,next) =>{
 
@@ -75,4 +75,25 @@ exports.patchComment = (req, res, next) => {
   };
 
 
+  exports.getCommentById = (req, res, next) => {
+    const comment_id = req.params.id;
+    console.log("comment_id",comment_id);
   
+    function isNumber(v){
+      const reg = /^(\s|\d)+$/;
+      return reg.test(v);
+    }
+  
+    // case: not a number
+  if(!isNumber(parseInt(comment_id))) {
+    return res.status(400).send({ msg: "Invalid input" });
+  }
+   
+  fetchCommentById(comment_id)
+    .then((comment) => {
+      res.status(200).send({ comment });
+    })
+    .catch((err) => {
+      next(err);
+    });
+  };

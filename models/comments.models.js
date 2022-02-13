@@ -1,17 +1,13 @@
 const db = require("../db/connection");
 
-exports.fetchComments = async(id) => {
-  const res = await db
-    .query("SELECT * FROM comments where article_id=$1;", [id]);
-
-    return res.rows;
-};
 
 exports.fetchComments = async(id) => {
   const res = await db
     .query("SELECT * FROM comments where article_id=$1;", [id]);
+
+    console.log("all comments",res.rows);
     
-    return res.rows[0];
+    return res.rows;
 };
 
 exports.fetchAllComments = async() => {
@@ -19,6 +15,32 @@ exports.fetchAllComments = async() => {
    
    return res.rows; 
 };
+
+exports.fetchCommentById = async (id) => {
+
+  const res = await db
+  .query(
+    "select EXISTS (select * from comments where comment_id=$1 limit 1) as success;",
+    [id]
+  );
+
+  return res.rows[0];
+
+  // if(res.rows[0].success){
+  //   const nextRes = await db
+  //   .query(
+  //     `SELECT articles.*, COUNT(comments.article_id) 
+  //   AS comment_count FROM articles 
+  //   LEFT JOIN comments ON articles.article_id = comments.article_id
+  //  WHERE articles.article_id = $1 GROUP BY articles.article_id`,
+  //     [id]
+  //   );
+  //   console.log(nextRes.rows[0])
+  //   return nextRes.rows[0];
+  // }
+  // console.log("article_id not valid")
+};
+
 
 
 exports.removeComment = (id) => {
