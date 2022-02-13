@@ -45,12 +45,11 @@ exports.updateArticle = async(id, update) => {
   console.log("article:", id, "votes:", update);
 
    const response = await db
-    .query("UPDATE articles SET votes=$1 WHERE article_id=$2 RETURNING *;", [
+    .query("UPDATE articles SET votes=votes+$1 WHERE article_id=$2 RETURNING *;", [
       update,
       id,
     ]);
 
-    console.log("votes added",response.rows[0])
     return response.rows[0];
 };
 

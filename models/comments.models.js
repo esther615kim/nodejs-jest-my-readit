@@ -5,7 +5,7 @@ exports.fetchComments = async(id) => {
   const res = await db
     .query("SELECT * FROM comments where article_id=$1;", [id]);
 
-    console.log("all comments",res.rows);
+    // console.log("all comments",res.rows);
     
     return res.rows;
 };
@@ -21,26 +21,10 @@ exports.fetchCommentById = async (id) => {
   const res = await db
   .query("SELECT * FROM comments where comment_id=$1;", [id]);
 
-  console.log("all comments",res.rows);
+  console.log("all comments",res.rows[0]);
   
   return res.rows;
 };
-
-  // if(res.rows[0].success){
-  //   const nextRes = await db
-  //   .query(
-  //     `SELECT articles.*, COUNT(comments.article_id) 
-  //   AS comment_count FROM articles 
-  //   LEFT JOIN comments ON articles.article_id = comments.article_id
-  //  WHERE articles.article_id = $1 GROUP BY articles.article_id`,
-  //     [id]
-  //   );
-  //   console.log(nextRes.rows[0])
-  //   return nextRes.rows[0];
-  // }
-  // console.log("article_id not valid")
-
-
 
 
 exports.removeComment = (id) => {
@@ -81,14 +65,13 @@ exports.addComment = (comment) => {
 
 exports.updateComment = async(id, update) => {
   
-  console.log("comment:", id, "votes:", update);
+  console.log("comment_id:", id, "votes:", update);
 
    const response = await db
-    .query("UPDATE comments SET votes=$1 WHERE article_id=$2 RETURNING *;", [
+    .query("UPDATE comments SET votes=votes+$1 WHERE comment_id=$2 RETURNING *;", [
       update,
       id,
     ]);
 
-    console.log("votes added",response.rows[0])
     return response.rows[0];
 };

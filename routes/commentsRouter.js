@@ -10,7 +10,7 @@ router.get('/comments/:id',getCommentById);
 
 router.delete('/comments/:id', deleteComment);
 
-router.patch("/:id", patchComment);
+router.patch("/comments/:id", patchComment);
 
 router.post('/articles/:id/comments', postComment);
 
