@@ -52,9 +52,9 @@ exports.getArticleById = (req, res, next) => {
   }
 
   // case: not a number
-// if(!isNumber(parseInt(article_id))) {
-//   return res.status(400).send({ msg: "Invalid input" });
-// }
+if(!isNumber(parseInt(article_id))) {
+  return res.status(400).send({ msg: "Invalid input" });
+}
  
   fetchArticleById(article_id)
   //   .then((article) => {
@@ -64,6 +64,13 @@ exports.getArticleById = (req, res, next) => {
   //   .catch((err) => {
   //     next(err);
   //   });
+  fetchArticleById(article_id)
+  .then((article) => {
+    res.status(200).send({ article });
+  })
+  .catch((err) => {
+    next(err);
+  });
 };
 
 exports.patchArticle = (req, res, next) => {

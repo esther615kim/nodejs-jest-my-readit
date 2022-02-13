@@ -6,6 +6,8 @@ router.get('/articles/:id/comments', getComments);
 
 router.get('/comments',getAllComments);
 
+// router.get('/comments/:id',getCommentById);
+
 router.delete('/comments/:id', deleteComment);
 
 router.patch("/:id", patchComment);
