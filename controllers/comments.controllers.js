@@ -1,4 +1,4 @@
-const { fetchComments,removeComment,addComment,fetchCommentById, updateComment,fetchAllComments} = require('../models/comments.models');
+const { fetchComments,removeComment,addComment,fetchCommentById , updateComment,fetchAllComments} = require('../models/comments.models');
 
 exports.getComments = (req,res,next) =>{
 

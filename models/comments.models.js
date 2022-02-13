@@ -19,12 +19,12 @@ exports.fetchAllComments = async() => {
 exports.fetchCommentById = async (id) => {
 
   const res = await db
-  .query(
-    "select EXISTS (select * from comments where comment_id=$1 limit 1) as success;",
-    [id]
-  );
+  .query("SELECT * FROM comments where comment_id=$1;", [id]);
 
-  return res.rows[0];
+  console.log("all comments",res.rows);
+  
+  return res.rows;
+};
 
   // if(res.rows[0].success){
   //   const nextRes = await db
@@ -39,7 +39,7 @@ exports.fetchCommentById = async (id) => {
   //   return nextRes.rows[0];
   // }
   // console.log("article_id not valid")
-};
+
 
 
 
