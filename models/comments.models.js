@@ -28,14 +28,27 @@ exports.fetchCommentById = async (id) => {
 
 
 exports.removeComment = (id) => {
-  console.log("comment to delete:", id);
-  // to add: check if it exists
+
   return db
     .query(
       "select EXISTS (select * from comments where comment_id=$1 limit 1) as success;",
       [id]
     )
-    .then((result) => { console.log(result)})
+    .then((result) => {
+
+      if (!result.rows[0].success) {
+        return;
+      } else {
+        console.log("let's delete it")
+        return db.query(
+          "DELETE FROM comments WHERE comment_id=$1;",
+          [id]
+        );
+      }
+    })
+    .then((result) => {
+      return result; 
+    });
    
 };
 

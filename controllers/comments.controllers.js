@@ -29,15 +29,18 @@ exports.deleteComment = (req,res,next)=>{
     const comment_id = req.params.id;
 
     removeComment(comment_id)
-    // .then(({rowCount})=>{
-    //     if(rowCount) {
-    //         res.status(204).send({msg:"deleted"}).end();
-    //     }else{
-    //         return Promise.reject({status:404, msg:"Not found"});
-    //     }
-    // }).catch((err)=>{
-    //     next(err);
-    // })
+    .then(({rowCount})=>{
+      console.log("result",rowCount);
+      
+        if(rowCount) {
+            res.status(204).send({msg:"deleted"}).end();
+        }else{
+            return Promise.reject({status:404, msg:"Comment Not found"});
+        }
+    }).catch((err)=>{
+        next(err);
+
+    })
 }
 
 exports.postComment = (req,res,next)=>{
