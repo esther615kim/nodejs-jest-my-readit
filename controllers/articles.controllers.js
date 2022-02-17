@@ -99,7 +99,7 @@ exports.deleteArticle = (req, res, next) => {
       if (rowCount) {
         return res.status(204).send({ msg: "deleted" }).end();
       } else {
-        return Promise.reject({ status: 404, msg: "Not found" });
+        return Promise.reject({ status: 404, msg: "Article Not found" });
       }
     })
     .catch((err) => {

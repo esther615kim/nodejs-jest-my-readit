@@ -58,15 +58,10 @@ exports.updateArticle = async(id, update) => {
 exports.removeArticle = async(id) => {
   console.log("article to delete:", id);
 
-  // return db.query("ALTER TABLE comments DROP CONSTRAINT comments_author_fkey;")
   const res = await db.query("select * from information_schema.table_constraints where table_name = 'comments';");
 
   const nextRes = await db.query("DELETE FROM articles where article_id=$1;", [id]);
-  // .then(()=>{
-  //   "ALTER TABLE comments ADD CONSTRAINT comments_author_fkey FOREIGN KEY(article_id) REFERENCES articles(article_id) ON DELETE CASCADE;" 
-  // })
   return nextRes.rowCount;
-  // .then(({rowCount})=> ({rowCount}));
 };
 
 
