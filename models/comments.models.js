@@ -40,26 +40,26 @@ exports.removeComment = (id) => {
 };
 
 
-exports.addComment = (comment) => {
-  const { username, body } = comment;
-
+exports.addComment = (comment,id) => {
+  const { author, body } = comment;
   return db
     .query(
       "select EXISTS (select * from users where username=$1 limit 1) as success;",
-      [username]
+      [author]
     )
     .then((result) => {
+      console.log(!result.rows[0].success);
       if (!result.rows[0].success) {
         return;
       } else {
         return db.query(
-          "INSERT INTO comments (author,body) VALUES ($1,$2) RETURNING *;",
-          [username, body]
-        );
+          "INSERT INTO comments (author,body,article_id) VALUES ($1,$2,$3) RETURNING *;",
+          [author, body,id]
+        )
       }
     })
     .then((result) => {
-      return result && result.rows[0];
+      return result.rows[0]; 
     });
 };
 

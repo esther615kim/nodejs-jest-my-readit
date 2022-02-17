@@ -43,8 +43,11 @@ exports.deleteComment = (req,res,next)=>{
 exports.postComment = (req,res,next)=>{
 
     const newComment = req.body;
-    addComment(newComment)
+    const {id} = req.params;
+
+    addComment(newComment,id)
     .then((comment) =>{
+      console.log("updated comment",comment)
         comment ? res.status(201).send({comment}) 
         : res.status(404).send({msg:"Invalid user" });
     }
