@@ -76,12 +76,6 @@ exports.patchArticle = (req, res, next) => {
   const article_id = req.params.id;
   const update = req.body.votes;
 
-  const numberChecker = /^(\s|\d)+$/;
-
-  if (!numberChecker.test(update)) {
-    return res.status(422).send({ msg: "Invalid input" });
-  }
-
   updateArticle(article_id, update)
     .then((article) => {
       res.status(200).send({ article });
