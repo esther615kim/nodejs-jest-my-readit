@@ -15,9 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-[to-dos]
-  - GET /api/articles (add queries: `order`,`topic`)
-  - POST /api/articles (comments_count)
+## [0.0.5] -2022-02-20
+### Changed 
+- patchComment to receive a negative vote(number)
+- PatchArticle function to receive a negative vote(number)
+
 ## [0.0.4] -2022-01-21
 
 ✅ hosting with heroku
