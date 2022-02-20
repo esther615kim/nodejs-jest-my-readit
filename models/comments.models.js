@@ -8,10 +8,17 @@ exports.fetchComments = async(id) => {
     return res.rows;
 };
 
-exports.fetchAllComments = async() => {
-   const res = await db.query("SELECT * FROM comments ORDER BY created_at DESC;");
-   
-   return res.rows; 
+exports.fetchAllComments = async({sort_by="created_at",order="desc"}) => {
+
+  if(sort_by ==="votes"){
+    const res = await db.query(`SELECT * FROM comments ORDER BY votes ${order};`);
+    return res.rows; 
+  }
+  else{
+    const res = await db.query(`SELECT * FROM comments ORDER BY created_at ${order};`);
+    return res.rows; 
+  }
+
 };
 
 exports.fetchCommentById = async (id) => {

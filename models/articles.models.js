@@ -135,7 +135,6 @@ exports.addArticle = async (newArticle) => {
       }
     })
     .then((result) => {
-      // console.log(result.rows[0]);
       return result && result.rows[0];
     });
 };
