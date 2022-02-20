@@ -2,15 +2,24 @@ const db = require("../db/connection");
 
 exports.fetchArticles = ({ sort_by = "created_at", order="desc", topic}) => {
   const orderedBy = order.toUpperCase();
-  console.log(sort_by,orderedBy);
 
-  if(topic){ return db.query(`SELECT * FROM articles WHERE topic in ($1) ORDER BY created_at DESC;`,[topic])
+  if(topic){ 
+    return db.query(`SELECT * FROM articles WHERE topic in ($1) ORDER BY created_at DESC;`,[topic])
   .then(({rows}) => {
     console.log("몇개",rows.length)
     return rows;
   })
 }
+  else if(topic&& sort_by){
+    console.log("sort_by",sort_by);
+    return db.query(`SELECT * FROM articles WHERE topic in ($1) ORDER BY $2 DESC;`,[topic,sort_by])
+    .then(({rows}) => {
+      console.log("몇개",rows.length)
+      return rows;
+    })
+  }
   else{
+    // default
     return db
     .query(`SELECT * FROM articles ORDER BY created_at DESC;`)
     .then(({rows}) => {

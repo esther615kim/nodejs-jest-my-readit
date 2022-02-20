@@ -3,15 +3,13 @@ const db = require("../db/connection");
 
 exports.fetchComments = async(id) => {
   const res = await db
-    .query("SELECT * FROM comments where article_id=$1;", [id]);
-
-    // console.log("all comments",res.rows);
+    .query("SELECT * FROM comments where article_id=$1 ORDER BY created_at DESC;", [id]);
     
     return res.rows;
 };
 
 exports.fetchAllComments = async() => {
-   const res = await db.query("SELECT * FROM comments;");
+   const res = await db.query("SELECT * FROM comments ORDER BY created_at DESC;");
    
    return res.rows; 
 };
