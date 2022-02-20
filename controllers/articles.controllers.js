@@ -21,7 +21,7 @@ exports.getArticles = (req, res, next) => {
   ];
   const orders = ["asc", "desc"];
 
-  console.log("get artilcles")
+  console.log("query",query)
   // input check1
   if (
     (sort_by && !sortBys.includes(sort_by)) ||

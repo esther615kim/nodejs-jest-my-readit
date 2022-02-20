@@ -1,17 +1,35 @@
 const db = require("../db/connection");
 
 exports.fetchArticles = ({ sort_by = "created_at", order="desc", topic}) => {
+  const orderedBy = order.toUpperCase();
+  console.log(sort_by,orderedBy);
 
-  // need refactoring idea here (DRY)
-  if(topic){
+  if(topic){ return db.query(`SELECT * FROM articles WHERE topic in ($1) ORDER BY created_at DESC;`,[topic])
+  .then(({rows}) => {
+    console.log("몇개",rows.length)
+    return rows;
+  })
+}
+  else{
     return db
-    .query(`SELECT * FROM articles WHERE topic in ($1) ORDER BY $2 ${order.toUpperCase()};`,[topic,sort_by])
-    .then(({rows}) => rows)
-  }else{
+    .query(`SELECT * FROM articles ORDER BY created_at DESC;`)
+    .then(({rows}) => {
+      console.log("몇개",rows.length)
+      return rows;
+    })
+
+  }
+  //   return db
+  //   // .query(`SELECT * FROM articles WHERE topic in ($1) ORDER BY $2 ${order.toUpperCase()};`,[topic,sort_by])
+  //   .query(`SELECT * FROM articles WHERE topic in ($1) ORDER BY $2 DESC;`,[topic,sort_by])
+  //   .then(({rows}) => rows)
+  // }else{
     return db
-    .query(`SELECT * FROM articles ORDER BY $1 ${order.toUpperCase()};`,[sort_by])
-    .then(({rows}) => rows)
-  } 
+    .query(`SELECT * FROM articles WHERE topic in ($1) ORDER BY created_at DESC;`,[topic])
+    .then(({rows}) => {
+      return rows;
+    })
+  // } 
 };
 
 exports.fetchArticleById = async (id) => {
