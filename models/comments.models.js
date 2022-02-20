@@ -1,11 +1,16 @@
 const db = require("../db/connection");
 
 
-exports.fetchComments = async(id) => {
-  const res = await db
-    .query("SELECT * FROM comments where article_id=$1 ORDER BY created_at DESC;", [id]);
-    
+exports.fetchArticleComments = async(sort_by="created_at",id) => {
+  console.log(sort_by);
+
+  if(sort_by ==="votes"){
+    const res = await db.query("SELECT * FROM comments where article_id=$1 ORDER BY votes DESC;", [id]);
+    return res.rows; 
+  }else{
+    const res = await db.query("SELECT * FROM comments where article_id=$1 ORDER BY created_at DESC;", [id]);
     return res.rows;
+  }
 };
 
 exports.fetchAllComments = async({sort_by="created_at",order="desc"}) => {

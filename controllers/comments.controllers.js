@@ -1,5 +1,5 @@
 const {
-  fetchComments,
+  fetchArticleComments,
   removeComment,
   addComment,
   fetchCommentById,
@@ -7,16 +7,24 @@ const {
   fetchAllComments,
 } = require("../models/comments.models");
 
-exports.getComments = (req, res, next) => {
+exports.getArticleComments = (req, res, next) => {
   const article_id = req.params.id;
-  console.log(article_id);
-  fetchComments(article_id)
+  const { sort_by } = req.query;
+  const sortBys = ["created_at", "votes"];
+  
+  // input check
+  if (sort_by && !sortBys.includes(sort_by)){
+    return res.status(400).send({ msg: "Bad bad request" });
+  } else {
+
+  fetchArticleComments(sort_by,article_id)
     .then((comments) => {
       res.status(200).send({ comments });
     })
     .catch((err) => {
       next(err);
     });
+  }
 };
 
 exports.getAllComments = (req, res, next) => {
