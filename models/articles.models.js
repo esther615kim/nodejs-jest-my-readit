@@ -1,17 +1,10 @@
 const db = require("../db/connection");
 
 exports.fetchArticles = ({ sort_by = "created_at", order = "desc", topic }) => {
+  console.log("query",sort_by,order,topic);
 
   if (topic) {
-    return db
-      .query(
-        `SELECT * FROM articles WHERE topic in ($1) ORDER BY created_at ${order};`,
-        [topic]
-      )
-      .then(({ rows }) => {
-        return rows;
-      });
-  } else if (topic && sort_by && order) {
+
     return db
       .query(
         `SELECT * FROM articles WHERE topic in ($1) ORDER BY ${sort_by} ${order};`,
@@ -20,18 +13,11 @@ exports.fetchArticles = ({ sort_by = "created_at", order = "desc", topic }) => {
       .then(({ rows }) => {
         return rows;
       });
-    }else if(sort_by){
-      return db
-      .query(
-        `SELECT * FROM articles  ORDER BY ${sort_by} ${order};`
-      )
-      .then(({ rows }) => {
-        return rows;
-      });
+
   } else {
-    // default
+  //   // default
     return db
-      .query(`SELECT * FROM articles ORDER BY created_at ${order};`)
+      .query(`SELECT * FROM articles ORDER BY ${sort_by} ${order};`)
       .then(({ rows }) => {
         return rows;
       });

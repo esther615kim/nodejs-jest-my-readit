@@ -20,7 +20,6 @@ exports.getArticles = (req, res, next) => {
     "votes",
   ];
   const orders = ["asc", "desc"];
-
   // input check1
   if (
     (sort_by && !sortBys.includes(sort_by)) ||

@@ -11,7 +11,6 @@ exports.getArticleComments = (req, res, next) => {
   const article_id = req.params.id;
   const { sort_by } = req.query;
   const sortBys = ["created_at", "votes"];
-  
   // input check
   if (sort_by && !sortBys.includes(sort_by)){
     return res.status(400).send({ msg: "Bad bad request" });
