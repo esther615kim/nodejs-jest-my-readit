@@ -11,7 +11,7 @@ exports.fetchArticles = ({ sort_by = "created_at", order = "desc", topic }) => {
       .then(({ rows }) => {
         return rows;
       });
-  } else if (topic && sort_by) {
+  } else if (topic && sort_by && order) {
     return db
       .query(
         `SELECT * FROM articles WHERE topic in ($1) ORDER BY ${sort_by} ${order};`,
