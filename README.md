@@ -3,7 +3,7 @@
 <div align="center">
 <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript"/> <img src="https://img.shields.io/badge/Express.js-0F9A41?style=for-the-badge&logo=express" alt="Express" /> <img src="https://img.shields.io/badge/Postgres-32668E?style=for-the-badge&logo=postgresql&logoColor=FFF" alt="Postgres" /> <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest" alt="Jest" /> 
 <p align="center">TDD-based restful APIs project </p>
-<p align="center"><a href="https://ek-reddit.herokuapp.com/articles">Heroku-hosted server</a></p>
+<p align="center"><a href="https://ek-reddit.herokuapp.com/api">Heroku-hosted server</a></p>
 </div>
 
 ## Project
